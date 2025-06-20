@@ -1,0 +1,33 @@
+[
+  {
+    "title": "Neonatal Intensive Care Training",
+    "specialties": [
+      "Pediatrics",
+      "Neonatology"
+    ],
+    "summary": "Covers critical neonatal procedures and NICU best practices."
+  },
+  {
+    "title": "Telemedicine Fundamentals",
+    "specialties": [
+      "General Medicine",
+      "Radiology"
+    ],
+    "summary": "Train on remote diagnostics, patient data handling, and virtual consultation ethics."
+  },
+  {
+    "title": "Emergency Response CME",
+    "specialties": [
+      "Emergency Medicine"
+    ],
+    "summary": "Skills for trauma triage, CPR, and critical first aid in high-pressure scenarios."
+  },
+  {
+    "title": "Clinical Research and Ethics",
+    "specialties": [
+      "General Medicine",
+      "Pediatrics"
+    ],
+    "summary": "Foundation in trial design, medical ethics, and pharma collaboration."
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "Pediatrics": {
+    "Neonatology": "Subspecialty overlap: NICU exposure",
+    "Emergency Medicine": "Handles acute pediatric cases",
+    "General Medicine": "Broad child care to general practice"
+  },
+  "Radiology": {
+    "Interventional Radiology": "Minimally invasive image-guided procedures",
+    "Nuclear Medicine": "Advanced imaging specialization",
+    "Emergency Medicine": "Urgent diagnostics"
+  },
+  "General Surgery": {
+    "Orthopedics": "Shared surgical skills, anatomy knowledge",
+    "Urology": "Procedural similarity in surgical techniques",
+    "Radiology": "Imaging proficiency supports surgical decision"
+  }
+}
