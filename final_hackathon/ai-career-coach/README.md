@@ -20,6 +20,8 @@ Medical professionals often seek to transition to different specialties due to i
 
 ---
 
+![alt text](Workflow.jpeg)
+
 ## 🧠 Agents Overview
 
 | Agent | Name | Description |
