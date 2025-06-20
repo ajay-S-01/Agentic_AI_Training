@@ -1,70 +1,187 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 🧠 AI Career Coach – Cross-Specialty Mobility Advisor 🩺
 
-## Available Scripts
+> 🚀 Final Hackathon Submission | Team: CareerAI | Tech Stack: React + FastAPI + LangChain + RAG
 
-In the project directory, you can run:
+This project is a complete AI-driven assistant designed to help doctors and clinicians navigate **career mobility across medical specialties**. It evaluates CVs, detects current specialty, understands career goals, maps skill gaps, and generates a personalized roadmap using advanced LLM and RAG pipelines.
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 📌 Problem Statement
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Medical professionals often seek to transition to different specialties due to interest, burnout, or evolving career goals. However, there's no structured tool that:
 
-### `npm test`
+- Analyzes their current specialty from documents
+- Suggests relevant lateral transitions
+- Identifies skill gaps and certifications
+- Generates a customized action plan
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+✅ Our solution builds **5 modular AI agents** to handle this end-to-end flow dynamically.
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🧠 Agents Overview
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+| Agent | Name | Description |
+|-------|------|-------------|
+| **Agent 1** | `Specialty Analyzer` | Extracts medical specialty from uploaded CV (PDF) using LangChain agent + Groq |
+| **Agent 2** | `Career Progression Mapper` | Accepts future career goal and suggests transitions |
+| **Agent 3** | `Skill Gap & Certification Detector` | Uses ChromaDB + RAG + web search to recommend micro-certifications and fill gaps |
+| **Agent 4** | `Lateral Mobility Scorer` | Scores potential specialty shifts using a graph and context-aware justification |
+| **Agent 5** | `Career Roadmap Generator` | Aggregates all prior agent data and generates an AI-generated PDF-ready roadmap using Groq LLM |
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## 🧱 Tech Stack
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Backend – FastAPI + LangChain
+- `LangChain Agents`, `LLMChain`, `PromptTemplate`
+- `Groq API` for LLM (LLaMA3 70B)
+- `ChromaDB` for RAG with persistent local vector store
+- `Tavily` for web search (optional)
+- `FastAPI` with clean endpoints for each agent
+- `.env` support via `python-dotenv`
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Frontend – React.js
+- Multi-page SPA using `react-router-dom`
+- `AgentContext` (React Context) to persist agent state across flows
+- Dynamic forms and result cards per agent
+- PDF export in Agent 5 using `react-to-print`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 🗂 Folder Structure
 
-## Learn More
+```
+ai-career-coach/
+├── backend/
+│   ├── app/
+│   │   ├── agents/                # Agent 1–5 logic
+│   │   ├── rag/                   # RAG vector search and web fetch
+│   │   └── main.py                # FastAPI app entry
+│   ├── data/                      # Graph mappings, samples
+│   ├── requirements.txt
+│   └── .env
+└── frontend/
+    ├── src/
+    │   ├── pages/                 # Agent1Page to Agent5Page
+    │   ├── components/            # File uploads, specialty inputs
+    │   └── context/AgentContext.js
+    └── package.json
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## ⚙️ Setup Instructions
 
-### Code Splitting
+### Backend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+cd backend
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env
+# Add your GROQ_API_KEY in .env
+uvicorn app.main:app --reload
+```
 
-### Analyzing the Bundle Size
+### Frontend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
-### Making a Progressive Web App
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 🌐 API Endpoints Summary
 
-### Advanced Configuration
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/analyze-specialty` | POST (PDF) | Upload CV and detect specialty |
+| `/career-goal` | POST | Submit career goal |
+| `/skill-gap` | POST | Return certification + skill gap recommendations |
+| `/mobility-score` | POST | Return lateral transition options and score |
+| `/career-roadmap` | POST | Final roadmap generation from all context |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
+## 🧠 LangChain Architecture
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- `initialize_agent()` used for Agent 1, 2, and 4
+- `LLMChain + PromptTemplate` used in Agent 5
+- `Vectorstore Retriever` + `ChromaDB` used in Agent 3
+- Modular `Tool()` interfaces for specialization
+- Web results dynamically appended and embedded to improve document recall
 
-### `npm run build` fails to minify
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 🎯 Agent Flow (UI)
+
+1. **Agent 1 Page**
+   - Upload PDF
+   - Backend extracts and returns specialty
+2. **Agent 2 Page**
+   - Input career goal
+   - Auto-saves in context
+3. **Agent 3 Page**
+   - Shows top certifications + skill gaps (from RAG)
+   - Based on real-time search + embedding match
+4. **Agent 4 Page**
+   - Shows lateral paths + score
+   - Visual cards for related specialties
+5. **Agent 5 Page**
+   - AI-generated roadmap summary
+   - Download as PDF button
+
+---
+
+## 📄 Sample Output (Agent 5)
+
+```
+🎯 Career Roadmap for Dr. Aditi Mehra
+
+- Current Specialty: Pediatrics
+- Goal: Neonatology
+
+📊 Lateral Mobility Score: 85/100
+
+✅ Recommended Certifications:
+- Neonatal Intensive Care
+- Pediatric Emergency Procedures
+
+🛠️ Action Plan:
+1. Complete certifications by Q3 2025
+2. Join monthly CME Neonatal webinars
+3. Apply for NICU fellowship by Q4 2025
+
+Keep learning and stay passionate — you’re on the right path!
+```
+
+---
+
+## 📦 Hackathon Ready Highlights
+
+✅ Multi-agent orchestration  
+✅ Modular & scalable backend  
+✅ Clean React frontend per agent  
+✅ Real-time document search & LLM explanation  
+✅ Beautiful roadmap PDF download  
+✅ High maintainability & extendability
+
+---
+
+## 👥 Authors & Credits
+
+Built with ❤️ by Team CareerAI  
+Mentorship: [Your Hackathon Guide or Mentor]  
+APIs used: GROQ, LangChain, Tavily, ChromaDB, FastAPI
+
+---
+
+## 📜 License
+
+MIT License © 2025  
+Use and modify for educational and career guidance tools.
