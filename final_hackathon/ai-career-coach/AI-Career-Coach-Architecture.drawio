@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2025-06-20T00:00:00.000Z" agent="5.0" etag="abc123" version="24.5.4" type="device" pages="3">
+  <diagram name="1. System Overview" id="page1">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Title -->
+        <mxCell id="title1" value="AI Career Coach - Medical Specialty Transition System" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="20" width="770" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="subtitle" value="React + FastAPI + LangChain + RAG Pipeline" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontStyle=2;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="200" y="50" width="770" height="30" as="geometry" />
+        </mxCell>
+        
+        <!-- Frontend Layer -->
+        <mxCell id="frontend-container" value="FRONTEND - React SPA" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1976D2;fontSize=14;fontStyle=1;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="50" y="100" width="1070" height="100" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="agent1-page" value="Agent 1 Page&#xa;CV Upload" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1976D2;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="80" y="130" width="100" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="agent2-page" value="Agent 2 Page&#xa;Career Goal" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1976D2;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="200" y="130" width="100" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="agent3-page" value="Agent 3 Page&#xa;Skill Gap" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1976D2;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="320" y="130" width="100" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="agent4-page" value="Agent 4 Page&#xa;Mobility Score" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1976D2;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="440" y="130" width="100" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="agent5-page" value="Agent 5 Page&#xa;Roadmap PDF" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1976D2;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="560" y="130" width="100" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="react-context" value="React Context&#xa;State Management" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#90CAF9;strokeColor=#1976D2;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="680" y="130" width="100" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="react-router" value="React Router&#xa;Navigation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#90CAF9;strokeColor=#1976D2;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="800" y="130" width="100" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="pdf-export" value="PDF Export&#xa;react-to-print" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#90CAF9;strokeColor=#1976D2;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="920" y="130" width="100" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- API Connection -->
+        <mxCell id="api-connection" value="REST API" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#FF5722;fontSize=12;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="585" y="200" as="sourcePoint" />
+            <mxPoint x="585" y="230" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Backend Layer -->
+        <mxCell id="backend-container" value="BACKEND - FastAPI + LangChain" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E8;strokeColor=#388E3C;fontSize=14;fontStyle=1;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="50" y="230" width="1070" height="160" as="geometry" />
+        </mxCell>
+        
+        <!-- API Endpoints -->
+        <mxCell id="endpoints" value="API Endpoints" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#388E3C;fontSize=12;fontStyle=1;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="70" y="260" width="200" height="120" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="endpoint1" value="/analyze-specialty" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A5D6A7;strokeColor=#388E3C;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="80" y="285" width="80" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="endpoint2" value="/career-goal" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A5D6A7;strokeColor=#388E3C;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="170" y="285" width="80" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="endpoint3" value="/skill-gap" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A5D6A7;strokeColor=#388E3C;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="80" y="315" width="80" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="endpoint4" value="/mobility-score" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A5D6A7;strokeColor=#388E3C;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="170" y="315" width="80" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="endpoint5" value="/career-roadmap" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A5D6A7;strokeColor=#388E3C;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="125" y="345" width="80" height="20" as="geometry" />
+        </mxCell>
+        
+        <!-- AI Agents -->
+        <mxCell id="agents-section" value="5 AI AGENTS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=12;fontStyle=1;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="290" y="260" width="680" height="120" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="agent1" value="Agent 1&#xa;Specialty&#xa;Analyzer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="310" y="285" width="80" height="50" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="agent2" value="Agent 2&#xa;Career&#xa;Mapper" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="410" y="285" width="80" height="50" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="agent3" value="Agent 3&#xa;Skill Gap&#xa;Detector" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="510" y="285" width="80" height="50" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="agent4" value="Agent 4&#xa;Mobility&#xa;Scorer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="610" y="285" width="80" height="50" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="agent5" value="Agent 5&#xa;Roadmap&#xa;Generator" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="710" y="285" width="80" height="50" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="langchain" value="LangChain&#xa;Framework" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCC02;strokeColor=#F57C00;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="820" y="285" width="120" height="50" as="geometry" />
+        </mxCell>
+        
+        <!-- Agent Flow -->
+        <mxCell id="flow1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#C62828;" edge="1" parent="1" source="agent1" target="agent2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="flow2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#C62828;" edge="1" parent="1" source="agent2" target="agent3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="flow3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#C62828;" edge="1" parent="1" source="agent3" target="agent4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="flow4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#C62828;" edge="1" parent="1" source="agent4" target="agent5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        
+        <!-- Data Layer Connection -->
+        <mxCell id="data-connection" value="AI Services" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#FF9800;fontSize=12;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="585" y="390" as="sourcePoint" />
+            <mxPoint x="585" y="420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- AI Services Layer -->
+        <mxCell id="services-container" value="AI SERVICES AND DATA" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#F57C00;fontSize=14;fontStyle=1;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="50" y="420" width="1070" height="120" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="groq-llm" value="Groq API&#xa;LLaMA3 70B" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#F57C00;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="80" y="460" width="120" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="chromadb" value="ChromaDB&#xa;Vector Store" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#FFE0B2;strokeColor=#F57C00;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="230" y="460" width="100" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="tavily" value="Tavily API&#xa;Web Search" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#F57C00;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="360" y="460" width="120" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="graph-data" value="Graph Data&#xa;Specialty Maps" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#FFE0B2;strokeColor=#F57C00;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="510" y="460" width="110" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="rag-pipeline" value="RAG Pipeline&#xa;Document Search" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCC02;strokeColor=#F57C00;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="650" y="460" width="120" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="pdf-processing" value="PDF Processing&#xa;Text Extraction" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#F57C00;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="800" y="460" width="120" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="config" value="Configuration&#xa;API Keys" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#F57C00;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="950" y="460" width="100" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Info Boxes -->
+        <mxCell id="problem-box" value="PROBLEM SOLVED" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E8;strokeColor=#388E3C;fontSize=12;fontStyle=1;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="50" y="570" width="350" height="120" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="problem-text" value="Medical professionals need structured tools for specialty transitions&#xa;&#xa;✓ Analyzes current specialty from CV&#xa;✓ Suggests relevant transitions&#xa;✓ Identifies skill gaps&#xa;✓ Provides certification recommendations&#xa;✓ Generates personalized roadmap" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="60" y="600" width="330" height="80" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="tech-box" value="TECH STACK" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#666666;fontSize=12;fontStyle=1;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="420" y="570" width="350" height="120" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="tech-text" value="Frontend: React.js, React Router, Context API&#xa;Backend: FastAPI, Python, uvicorn&#xa;AI: LangChain, Groq (LLaMA3), ChromaDB&#xa;Search: Tavily API, RAG Pipeline&#xa;Data: Vector embeddings, Graph mappings&#xa;Export: react-to-print, PDF generation" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="430" y="600" width="330" height="80" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="output-box" value="SAMPLE OUTPUT" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#F57C00;fontSize=12;fontStyle=1;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="790" y="570" width="330" height="120" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="output-text" value="Career Roadmap for Dr. Aditi Mehra&#xa;&#xa;Current: Pediatrics → Goal: Neonatology&#xa;Mobility Score: 85/100&#xa;&#xa;Required Certifications:&#xa;• Neonatal Intensive Care&#xa;• Pediatric Emergency Procedures&#xa;&#xa;Timeline: Q3-Q4 2025" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="800" y="600" width="310" height="80" as="geometry" />
+        </mxCell>
+        
+      </root>
+    </mxGraphModel>
+  </diagram>
+  
+  <diagram name="2. Agent Pipeline" id="page2">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Title -->
+        <mxCell id="title2" value="AI Agent Pipeline - Detailed Workflow" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="20" width="570" height="40" as="geometry" />
+        </mxCell>
+        
+        <!-- User Input -->
+        <mxCell id="user-input" value="MEDICAL PROFESSIONAL&#xa;INPUT" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1F5FE;strokeColor=#0277BD;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="80" width="150" height="60" as="geometry" />
+        </mxCell>
+        
+        <!-- Agent 1 -->
+        <mxCell id="agent1-detail" value="AGENT 1: SPECIALTY ANALYZER&#xa;&#xa;Input: PDF CV Upload&#xa;&#xa;Process:&#xa;• PDF text extraction&#xa;• LangChain agent analysis&#xa;• Groq LLM processing&#xa;• Medical terminology parsing&#xa;&#xa;Output: Current Specialty" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E8;strokeColor=#388E3C;fontSize=10;align=left;spacingLeft=10;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="250" y="80" width="180" height="120" as="geometry" />
+        </mxCell>
+        
+        <!-- Agent 2 -->
+        <mxCell id="agent2-detail" value="AGENT 2: CAREER MAPPER&#xa;&#xa;Input: Career Goal + Current Specialty&#xa;&#xa;Process:&#xa;• Goal analysis and validation&#xa;• Transition pathway mapping&#xa;• LangChain agent reasoning&#xa;• Feasibility assessment&#xa;&#xa;Output: Transition Strategy" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E8;strokeColor=#388E3C;fontSize=10;align=left;spacingLeft=10;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="470" y="80" width="180" height="120" as="geometry" />
+        </mxCell>
+        
+        <!-- Agent 3 -->
+        <mxCell id="agent3-detail" value="AGENT 3: SKILL GAP DETECTOR&#xa;&#xa;Input: Current + Target Specialty&#xa;&#xa;Process:&#xa;• ChromaDB vector search&#xa;• RAG-based certification lookup&#xa;• Tavily web search integration&#xa;• Skill gap analysis&#xa;&#xa;Output: Required Certifications" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#F57C00;fontSize=10;align=left;spacingLeft=10;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="690" y="80" width="180" height="120" as="geometry" />
+        </mxCell>
+        
+        <!-- Agent 4 -->
+        <mxCell id="agent4-detail" value="AGENT 4: MOBILITY SCORER&#xa;&#xa;Input: Specialty Transition Data&#xa;&#xa;Process:&#xa;• Graph-based specialty mapping&#xa;• Transition difficulty scoring&#xa;• Context-aware analysis&#xa;• Risk assessment&#xa;&#xa;Output: Mobility Score (0-100)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=10;align=left;spacingLeft=10;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="910" y="80" width="180" height="120" as="geometry" />
+        </mxCell>
+        
+        <!-- Agent 5 -->
+        <mxCell id="agent5-detail" value="AGENT 5: ROADMAP GENERATOR&#xa;&#xa;Input: All Previous Agent Data&#xa;&#xa;Process:&#xa;• Data aggregation and synthesis&#xa;• LLMChain + PromptTemplate&#xa;• Groq LLM summarization&#xa;• Timeline generation&#xa;• Action plan creation&#xa;&#xa;Output: Complete Career Roadmap" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=10;align=left;spacingLeft=10;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="470" y="250" width="200" height="140" as="geometry" />
+        </mxCell>
+        
+        <!-- Data Sources -->
+        <mxCell id="chromadb-source" value="ChromaDB&#xa;Vector Store&#xa;&#xa;• Medical certifications&#xa;• Course database&#xa;• Skill requirements" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#E1F5FE;strokeColor=#0277BD;fontSize=10;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="50" y="250" width="150" height="100" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="web-source" value="Web Search&#xa;Tavily API&#xa;&#xa;• Real-time data&#xa;• Latest certifications&#xa;• Industry trends" style="ellipse;whiteSpace=wrap;html=1;fillColor=#E8F5E8;strokeColor=#388E3C;fontSize=10;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="250" y="250" width="150" height="100" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="graph-source" value="Graph Data&#xa;Specialty Mappings&#xa;&#xa;• Transition paths&#xa;• Difficulty scores&#xa;• Career hierarchies" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#FFF3E0;strokeColor=#F57C00;fontSize=10;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="720" y="250" width="150" height="100" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="groq-service" value="Groq LLM&#xa;LLaMA3 70B&#xa;&#xa;• Natural language processing&#xa;• Content generation&#xa;• Analysis and reasoning" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=10;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="920" y="250" width="150" height="100" as="geometry" />
+        </mxCell>
+        
+        <!-- Flow Arrows -->
+        <mxCell id="input-agent1" value="CV Upload" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#0277BD;fontSize=10;" edge="1" parent="1" source="user-input" target="agent1-detail">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="215" y="120" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="agent1-agent2" value="Current Specialty" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#388E3C;fontSize=10;" edge="1" parent="1" source="agent1-detail" target="agent2-detail">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="445" y="120" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="agent2-agent3" value="Transition Plan" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#F57C00;fontSize=10;" edge="1" parent="1" source="agent2-detail" target="agent3-detail">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="665" y="120" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="agent3-agent4" value="Skill Requirements" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#C62828;fontSize=10;" edge="1" parent="1" source="agent3-detail" target="agent4-detail">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="885" y="120" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="agent4-agent5" value="Mobility Score" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#7B1FA2;fontSize=10;" edge="1" parent="1" source="agent4-detail" target="agent5-detail">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1000" y="220" />
+              <mxPoint x="570" y="220" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Data Source Connections -->
+        <mxCell id="chromadb-agent3" value="Vector Search" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#0277BD;fontSize=10;" edge="1" parent="1" source="chromadb-source" target="agent3-detail">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="125" y="210" />
+              <mxPoint x="780" y="210" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="web-agent3" value="Real-time Data" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#388E3C;fontSize=10;" edge="1" parent="1" source="web-source" target="agent3-detail">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="325" y="215" />
+              <mxPoint x="770" y="215" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="graph-agent4" value="Mapping Data" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#F57C00;fontSize=10;" edge="1" parent="1" source="graph-source" target="agent4-detail">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="795" y="225" />
+              <mxPoint x="990" y="225" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Output -->
+        <mxCell id="final-output" value="FINAL OUTPUT&#xa;Complete Career Roadmap&#xa;&#xa;✓ Current Specialty Analysis&#xa;✓ Target Career Goal&#xa;✓ Required Certifications&#xa;✓ Skill Gap Assessment&#xa;✓ Transition Timeline&#xa;✓ Mobility Score&#xa;✓ Action Plan&#xa;✓ PDF Download" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=11;align=left;spacingLeft=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="450" y="420" width="240" height="140" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="agent5-output" value="Generated Roadmap" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;strokeColor=#7B1FA2;fontSize=12;" edge="1" parent="1" source="agent5-detail" target="final-output">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="570" y="405" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- LangChain Info -->
+        <mxCell id="langchain-box" value="LANGCHAIN COMPONENTS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=12;fontStyle=1;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="50" y="420" width="350" height="140" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="agent-framework" value="initialize_agent()&#xa;Used in Agents 1, 2, 4&#xa;Tool integration" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C5CAE9;strokeColor=#3F51B5;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="70" y="450" width="140" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="llm-chain" value="LLMChain + PromptTemplate&#xa;Used in Agent 5&#xa;Template management" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C5CAE9;strokeColor=#3F51B5;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="230" y="450" width="150" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="vector-retriever" value="Vectorstore Retriever&#xa;ChromaDB integration&#xa;Document retrieval" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C5CAE9;strokeColor=#3F51B5;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="70" y="500" width="140" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="tool-interface" value="Tool() Interfaces&#xa;Custom tool creation&#xa;Function wrapping" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C5CAE9;strokeColor=#3F51B5;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="230" y="500" width="150" height="40" as="geometry" />
+        </mxCell>
+        
+        <!-- Performance Info -->
+        <mxCell id="timing-box" value="PROCESSING TIME" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFEBE9;strokeColor=#5D4037;fontSize=12;fontStyle=1;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="750" y="420" width="340" height="140" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="agent-times" value="Agent 1: 5-10 seconds (PDF processing)&#xa;Agent 2: 3-5 seconds (Goal analysis)&#xa;Agent 3: 10-15 seconds (RAG + Web search)&#xa;Agent 4: 5-8 seconds (Score calculation)&#xa;Agent 5: 8-12 seconds (Roadmap generation)&#xa;&#xa;Total Pipeline: 30-50 seconds" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="770" y="450" width="300" height="100" as="geometry" />
+        </mxCell>
+        
+      </root>
+    </mxGraphModel>
+  </diagram>
+  
+  <diagram name="3. Frontend Flow" id="page3">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Title -->
+        <mxCell id="title3" value="Frontend User Journey - React SPA Flow" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="20" width="570" height="40" as="geometry" />
+        </mxCell>
+        
+        <!-- User Flow Steps -->
+        <mxCell id="step1" value="STEP 1: CV UPLOAD&#xa;Agent1Page.jsx&#xa;&#xa;• File upload component&#xa;• PDF validation&#xa;• Loading state&#xa;• Specialty display" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1976D2;fontSize=11;align=left;spacingLeft=10;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="50" y="80" width="180" height="100" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="step2" value="STEP 2: CAREER GOAL&#xa;Agent2Page.jsx&#xa;&#xa;• Goal input form&#xa;• Specialty selection&#xa;• Auto-suggestions&#xa;• Validation feedback" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E8;strokeColor=#388E3C;fontSize=11;align=left;spacingLeft=10;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="260" y="80" width="180" height="100" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="step3" value="STEP 3: SKILL ANALYSIS&#xa;Agent3Page.jsx&#xa;&#xa;• RAG search results&#xa;• Certification cards&#xa;• Skill gap visualization&#xa;• Resource links" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#F57C00;fontSize=11;align=left;spacingLeft=10;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="470" y="80" width="180" height="100" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="step4" value="STEP 4: MOBILITY SCORE&#xa;Agent4Page.jsx&#xa;&#xa;• Score visualization&#xa;• Lateral path cards&#xa;• Difficulty indicators&#xa;• Transition options" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=11;align=left;spacingLeft=10;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="680" y="80" width="180" height="100" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="step5" value="STEP 5: ROADMAP EXPORT&#xa;Agent5Page.jsx&#xa;&#xa;• Complete roadmap view&#xa;• PDF generation&#xa;• Download button&#xa;• Summary dashboard" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=11;align=left;spacingLeft=10;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="890" y="80" width="180" height="100" as="geometry" />
+        </mxCell>
+        
+        <!-- React Components -->
+        <mxCell id="components-section" value="REACT COMPONENTS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#666666;fontSize=14;fontStyle=1;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="50" y="220" width="1020" height="160" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="file-upload" value="FileUpload.jsx&#xa;&#xa;• Drag and drop zone&#xa;• File validation&#xa;• Upload progress&#xa;• Error handling" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1976D2;fontSize=10;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="70" y="250" width="140" height="80" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="specialty-input" value="SpecialtyInput.jsx&#xa;&#xa;• Autocomplete&#xa;• Validation&#xa;• Real-time search&#xa;• Medical terminology" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E8;strokeColor=#388E3C;fontSize=10;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="230" y="250" width="140" height="80" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="results-display" value="ResultsDisplay.jsx&#xa;&#xa;• Card layout&#xa;• Progress indicators&#xa;• Interactive elements&#xa;• Data visualization" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#F57C00;fontSize=10;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="390" y="250" width="140" height="80" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="score-viz" value="ScoreVisualization.jsx&#xa;&#xa;• Progress rings&#xa;• Color coding&#xa;• Interactive tooltips&#xa;• Responsive design" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=10;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="550" y="250" width="140" height="80" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="pdf-export-comp" value="PDFExport.jsx&#xa;&#xa;• react-to-print&#xa;• Custom styling&#xa;• Professional layout&#xa;• Download trigger" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=10;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="710" y="250" width="140" height="80" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="navigation" value="Navigation.jsx&#xa;&#xa;• Progress breadcrumb&#xa;• Step validation&#xa;• Disabled states&#xa;• Mobile responsive" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=10;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="870" y="250" width="140" height="80" as="geometry" />
+        </mxCell>
+        
+        <!-- State Management -->
+        <mxCell id="context-section" value="REACT CONTEXT AND STATE" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=14;fontStyle=1;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="50" y="400" width="500" height="140" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="agent-context" value="AgentContext.js&#xa;&#xa;State:&#xa;• currentSpecialty: string&#xa;• careerGoal: string&#xa;• skillGaps: array&#xa;• mobilityScore: number&#xa;• roadmapData: object&#xa;&#xa;Methods:&#xa;• updateSpecialty()&#xa;• setCareerGoal()&#xa;• generateRoadmap()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C5CAE9;strokeColor=#3F51B5;fontSize=10;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="70" y="430" width="460" height="100" as="geometry" />
+        </mxCell>
+        
+        <!-- API Integration -->
+        <mxCell id="api-section" value="API INTEGRATION" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EFEBE9;strokeColor=#5D4037;fontSize=14;fontStyle=1;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="570" y="400" width="500" height="140" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="api-hooks" value="Custom Hooks&#xa;&#xa;useAgent1() - CV Analysis&#xa;• POST /analyze-specialty&#xa;• File upload handling&#xa;&#xa;useAgent2() - Career Goal&#xa;• POST /career-goal&#xa;• Goal validation&#xa;&#xa;useAgent3() - Skill Gap&#xa;• POST /skill-gap&#xa;• RAG results processing&#xa;&#xa;useAgent4() - Mobility Score&#xa;• POST /mobility-score&#xa;• Score visualization&#xa;&#xa;useAgent5() - Roadmap&#xa;• POST /career-roadmap&#xa;• PDF generation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D7CCC8;strokeColor=#5D4037;fontSize=10;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="590" y="430" width="460" height="100" as="geometry" />
+        </mxCell>
+        
+        <!-- User Flow Arrows -->
+        <mxCell id="flow1-2" value="Specialty Detected" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#1976D2;fontSize=10;" edge="1" parent="1" source="step1" target="step2">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="245" y="120" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="flow2-3" value="Goal Set" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#388E3C;fontSize=10;" edge="1" parent="1" source="step2" target="step3">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="455" y="120" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="flow3-4" value="Skills Analyzed" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#F57C00;fontSize=10;" edge="1" parent="1" source="step3" target="step4">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="665" y="120" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="flow4-5" value="Score Calculated" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#C62828;fontSize=10;" edge="1" parent="1" source="step4" target="step5">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="875" y="120" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        
+        <!-- Tech Stack -->
+        <mxCell id="tech-stack-frontend" value="FRONTEND TECH STACK" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E8;strokeColor=#388E3C;fontSize=14;fontStyle=1;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="50" y="570" width="1020" height="100" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="react-tech" value="React 18&#xa;Functional components&#xa;Hooks (useState, useEffect)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#388E3C;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="70" y="600" width="140" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="router-tech" value="React Router&#xa;react-router-dom&#xa;Page navigation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#388E3C;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="230" y="600" width="140" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="styling-tech" value="CSS Modules&#xa;Responsive design&#xa;Custom animations" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#388E3C;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="390" y="600" width="140" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="pdf-tech" value="react-to-print&#xa;PDF generation&#xa;Download handling" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#388E3C;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="550" y="600" width="140" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="http-tech" value="Fetch API&#xa;Async/await&#xa;Error handling" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#388E3C;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="710" y="600" width="140" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="build-tech" value="Vite&#xa;Development server&#xa;Production build" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#388E3C;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="870" y="600" width="140" height="60" as="geometry" />
+        </mxCell>
+        
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
