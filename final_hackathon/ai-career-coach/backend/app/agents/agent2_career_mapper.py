@@ -1,6 +1,7 @@
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
 import os
+import json
 
 load_dotenv()
 
@@ -19,13 +20,18 @@ The user has a background in: {specialty}
 Their goal is: {goal}
 
 Recommend 3 logical next career paths that align with their specialty and goal.
-For each suggestion, explain why it makes sense.
-Format your response like this:
-
-1. [Career Path] – [Rationale]
-2. ...
-3. ...
+For each suggestion, respond as a JSON object with "career" and "summary" fields.
+Format your response as a JSON array, like:
+[
+  {{"career": "Neonatology", "summary": "Subspecialty overlap: NICU exposure"}},
+  ...
+]
+Respond with only the JSON array, no explanation.
 """
-
     response = llm.invoke(prompt)
-    return {"paths": response.content.strip()}
+    try:
+        paths = json.loads(response.content.strip())
+    except Exception:
+        # fallback: return as text if parsing fails
+        return {"paths": []}
+    return {"paths": paths}

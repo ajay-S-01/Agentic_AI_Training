@@ -2,13 +2,14 @@ from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from app.agents.agent1_specialty_analyzer import classify_specialty
 from app.agents.agent2_career_mapper import recommend_career_paths
-from app.agents.agent3_skill_gap_detector import recommend_certifications
+from app.agents.agent3_skill_gap_detector import recommend_certifications_for_gap
 from app.agents.agent4_mobility_scorer import score_specialty_mobility
 from app.agents.agent5_roadmap_generator import generate_roadmap
 from fastapi import Form
 from app.utils.file_parser import extract_text_from_pdf
 import os
 import shutil
+import json
 
 app = FastAPI()
 
@@ -37,13 +38,16 @@ async def map_career(specialty: str = Form(...), goal: str = Form(...)):
     return recommend_career_paths(specialty, goal)
 
 @app.post("/skill-gap")
-def skill_gap(specialty: str = Form(...)):
-    results = recommend_certifications(specialty)
-    return {"recommendations": results}
+def skill_gap(
+    current_specialty: str = Form(...),
+    target_specialty: str = Form(...)
+):
+    results = recommend_certifications_for_gap(current_specialty, target_specialty)
+    return results
 
 @app.post("/mobility-score")
-def mobility_score(specialty: str = Form(...)):
-    return score_specialty_mobility(specialty)
+def mobility_score(specialty: str = Form(...), goal: str = Form("")):
+    return score_specialty_mobility(specialty, goal)
 
 @app.post("/career-roadmap")
 def career_roadmap(
@@ -53,6 +57,15 @@ def career_roadmap(
     certifications: str = Form(...),
     mobility_info: str = Form(...)
 ):
+    # Parse JSON strings
+    try:
+        skill_gaps = json.loads(skill_gaps)
+    except Exception:
+        pass
+    try:
+        certifications = json.loads(certifications)
+    except Exception:
+        pass
     roadmap = generate_roadmap(current_specialty, career_goal, skill_gaps, certifications, mobility_info)
     return {"roadmap": roadmap}
 

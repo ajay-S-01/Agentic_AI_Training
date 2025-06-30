@@ -2,6 +2,7 @@
 import axios from 'axios';
 import { useState, useContext, useEffect } from 'react';
 import { AgentContext } from '../context/AgentContext';
+import Select from 'react-select';
 
 // Custom Modal Component for alerts (replaces native alert())
 const CustomModal = ({ message, onClose }) => {
@@ -22,10 +23,15 @@ const CustomModal = ({ message, onClose }) => {
 
 export default function SkillGapDetector() {
   // Access specialty and its setter from AgentContext, also skills and certifications setters
-  const { specialty, setSpecialty, setSkills, setCertifications } = useContext(AgentContext);
+  const { specialty, setSpecialty, setSkills, setCertifications, targetSpecialty, setTargetSpecialty, careerPaths } = useContext(AgentContext);
   const [recommendations, setRecommendations] = useState([]); // State for certification recommendations
   const [loading, setLoading] = useState(false); // State for loading status
   const [modalMessage, setModalMessage] = useState(''); // State for custom modal message
+  const [missingSkills, setMissingSkills] = useState([]);
+  const options = careerPaths.map(path => ({
+    value: path.career,
+    label: `${path.career} - ${path.summary}`
+  }));
 
   // Effect to set default specialty if available in context
   useEffect(() => {
@@ -35,37 +41,27 @@ export default function SkillGapDetector() {
 
   // Handle the search for certifications and skill gaps
   const handleSearch = async () => {
-    if (!specialty) {
-      setModalMessage("Please enter your specialty.");
+    if (!specialty || !targetSpecialty) {
+      setModalMessage("Please enter both your current and target specialties.");
       return;
     }
 
-    setLoading(true); // Start loading
+    setLoading(true);
     const formData = new FormData();
-    formData.append("specialty", specialty);
+    formData.append("current_specialty", specialty);
+    formData.append("target_specialty", targetSpecialty);
 
-    try {
-      const res = await axios.post("http://localhost:8000/skill-gap", formData);
-      setRecommendations(res.data.recommendations || []); // Set recommendations array
-
-      // Assuming backend might return skills directly or derive them from recommendations
-      // For now, derive skills and certifications from the recommendations returned
-      const extractedSkills = res.data.recommendations
-        ?.map(rec => rec.title) // Assuming title can represent a skill or certification
-        .join(', '); // Join them into a comma-separated string
-      
-      const extractedCertifications = res.data.recommendations
-        ?.map(rec => rec.title) // Assuming title can represent a skill or certification
-        .join(', ');
-
-      setSkills(extractedSkills || ""); // Store skills in context
-      setCertifications(extractedCertifications || ""); // Store certifications in context
-    } catch (err) {
-      console.error("Failed to fetch recommendations:", err);
-      setModalMessage("Failed to fetch recommendations. Please try again.");
-    } finally {
-      setLoading(false); // End loading
-    }
+   try {
+  const res = await axios.post("http://localhost:8000/skill-gap", formData);
+  setRecommendations(res.data.recommendations || []);
+  setSkills(res.data.missing_skills || []); // <-- store as array
+  setMissingSkills(res.data.missing_skills || []);
+  setCertifications(res.data.recommendations || []); // <-- store as array
+} catch (err) {
+  setModalMessage("Failed to fetch recommendations. Please try again.");
+} finally {
+  setLoading(false);
+}
   };
 
   return (
@@ -74,16 +70,13 @@ export default function SkillGapDetector() {
 
       {/* Input for specialty */}
       <div className="mb-6">
-        <label htmlFor="specialty-input" className="block text-gray-700 text-sm font-bold mb-2">
-          Your Specialty
-        </label>
-        <input
-          id="specialty-input"
-          type="text"
-          placeholder="Enter your specialty (e.g., Pediatrics)"
-          value={specialty}
-          onChange={(e) => setSpecialty(e.target.value)}
-          className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+        <Select
+          options={options}
+          value={options.find(opt => opt.value === targetSpecialty) || null}
+          onChange={option => setTargetSpecialty(option ? option.value : "")}
+          isClearable
+          isSearchable
+          placeholder="Select or type target career path"
         />
       </div>
 
@@ -107,6 +100,16 @@ export default function SkillGapDetector() {
           'Find Certifications'
         )}
       </button>
+      {missingSkills.length > 0 && (
+        <div className="mt-8 p-6 bg-yellow-50 rounded-lg border border-yellow-200 shadow-sm animate-fade-in">
+          <h3 className="text-xl font-bold text-yellow-700 mb-4">Skill Gaps:</h3>
+          <ul className="list-disc list-inside space-y-1 text-gray-800">
+            {missingSkills.map((skillObj, idx) => (
+              <li key={idx}>{skillObj.text}</li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       {/* Display recommendations */}
       {recommendations.length > 0 && (

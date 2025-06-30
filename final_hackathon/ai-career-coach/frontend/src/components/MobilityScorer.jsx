@@ -22,7 +22,7 @@ const CustomModal = ({ message, onClose }) => {
 
 export default function MobilityScorer() {
   // Access specialty and setMobility from AgentContext
-  const { specialty, setMobility } = useContext(AgentContext);
+  const { specialty, setMobility, goal } = useContext(AgentContext);
   const [result, setResult] = useState(null); // State to store mobility score results
   const [loading, setLoading] = useState(false); // State for loading status
   const [modalMessage, setModalMessage] = useState(''); // State for custom modal message
@@ -38,6 +38,7 @@ export default function MobilityScorer() {
     setLoading(true); // Start loading
     const formData = new FormData();
     formData.append("specialty", specialty);
+    formData.append("goal", goal); // Include goal in the request
 
     try {
       const res = await axios.post("http://localhost:8000/mobility-score", formData);
@@ -90,9 +91,9 @@ export default function MobilityScorer() {
             {result.alternatives.map((alt, i) => (
               <li key={i} className="bg-gray-50 p-5 rounded-lg shadow-sm border border-gray-200 transform hover:scale-[1.02] transition-transform duration-200 flex flex-col items-start">
                 <strong className="text-xl font-semibold text-blue-700 mb-2">
-                  {alt.target} <span className="text-gray-600 text-base">({alt.score}/100)</span>
+                  {alt.specialty} <span className="text-gray-600 text-base">({alt.score}/100)</span>
                 </strong>
-                <p className="text-gray-700 text-base leading-relaxed">{alt.why}</p>
+                <p className="text-gray-700 text-base leading-relaxed">{alt.summary}</p>
               </li>
             ))}
           </ul>

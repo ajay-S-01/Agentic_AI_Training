@@ -1,33 +1,26 @@
-// src/components/CareerMapper.js
 import { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { AgentContext } from '../context/AgentContext';
 
-// Custom Modal Component for alerts (replaces native alert())
-const CustomModal = ({ message, onClose }) => {
-  return (
-    <div className="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg shadow-xl p-6 m-4 max-w-sm w-full text-center">
-        <p className="text-lg font-semibold text-gray-800 mb-4">{message}</p>
-        <button
-          onClick={onClose}
-          className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 transition-all duration-200"
-        >
-          OK
-        </button>
-      </div>
+const CustomModal = ({ message, onClose }) => (
+  <div className="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50">
+    <div className="bg-white rounded-lg shadow-xl p-6 m-4 max-w-sm w-full text-center">
+      <p className="text-lg font-semibold text-gray-800 mb-4">{message}</p>
+      <button
+        onClick={onClose}
+        className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 transition-all duration-200"
+      >
+        OK
+      </button>
     </div>
-  );
-};
+  </div>
+);
 
 export default function CareerMapper() {
-  // Access specialty, goal, and their setters from AgentContext
-  const { specialty, setSpecialty, goal, setGoal } = useContext(AgentContext);
-  const [result, setResult] = useState(''); // State to store career path results
-  const [loading, setLoading] = useState(false); // State to manage loading status
-  const [modalMessage, setModalMessage] = useState(''); // State for custom modal message
+  const { specialty, setSpecialty, goal, setGoal, careerPaths, setCareerPaths } = useContext(AgentContext);
+  const [loading, setLoading] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
 
-  // Predefined list of specialties
   const specialties = [
     "General Medicine",
     "Pediatrics",
@@ -38,20 +31,18 @@ export default function CareerMapper() {
     "Family Medicine"
   ];
 
-  // Set a default goal if none is present when specialty is set
   useEffect(() => {
     if (specialty && !goal) {
       setGoal(`move to the next level in ${specialty.toLowerCase()}`);
     }
   }, [specialty, goal, setGoal]);
 
-  // Handle form submission to map career paths
   const handleSubmit = async () => {
     if (!specialty || !goal) {
       setModalMessage("Please select a specialty and enter your goal.");
       return;
     }
-    setLoading(true); // Start loading
+    setLoading(true);
 
     const formData = new FormData();
     formData.append("specialty", specialty);
@@ -59,12 +50,11 @@ export default function CareerMapper() {
 
     try {
       const res = await axios.post("http://localhost:8000/map-career", formData);
-      setResult(res.data.paths); // Set the result with paths from the API response
+      setCareerPaths(res.data.paths || []);
     } catch (err) {
-      console.error("Failed to fetch career paths:", err);
       setModalMessage("Failed to fetch career paths. Please try again.");
     } finally {
-      setLoading(false); // End loading
+      setLoading(false);
     }
   };
 
@@ -127,19 +117,19 @@ export default function CareerMapper() {
       </button>
 
       {/* Display suggested career paths */}
-      {result && (
+      {careerPaths.length > 0 && (
         <div className="mt-8 p-6 bg-emerald-50 rounded-lg border border-emerald-200 shadow-sm animate-fade-in">
           <h3 className="text-xl font-bold text-emerald-700 mb-4">Suggested Career Paths:</h3>
           <ul className="list-disc list-inside space-y-3 text-gray-700">
-            {/* Split by newline and map to list items, handling potential empty lines */}
-            {result.split('\n').filter(line => line.trim() !== '').map((line, index) => (
-              <li key={index} className="pl-2 leading-relaxed text-base">{line}</li>
+            {careerPaths.map((path, index) => (
+              <li key={index} className="pl-2 leading-relaxed text-base">
+                <span className="font-semibold">{path.career}:</span> {path.summary}
+              </li>
             ))}
           </ul>
         </div>
       )}
 
-      {/* Custom Modal rendering */}
       {modalMessage && <CustomModal message={modalMessage} onClose={() => setModalMessage('')} />}
     </div>
   );
