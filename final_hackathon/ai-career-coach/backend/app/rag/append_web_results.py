@@ -4,7 +4,7 @@ from langchain_community.vectorstores import Chroma
 from langchain_community.embeddings import HuggingFaceEmbeddings
 
 def fetch_and_store_online(specialty: str):
-    embedding = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+    embedding = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2" , model_kwargs={"device": "cpu"})
     db = Chroma(persist_directory="app/rag/chroma_index", embedding_function=embedding)
 
     web_docs = search_certifications(f"certifications for {specialty}")

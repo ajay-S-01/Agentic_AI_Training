@@ -3,7 +3,7 @@ import { AgentContext } from '../context/AgentContext';
 import { Download, MapPin, Target, Award, Users, CheckCircle, Clock, ArrowRight, GitCommitHorizontal, Briefcase, Star, TrendingUp } from 'lucide-react';
 import { useReactToPrint } from 'react-to-print';
 
-// No changes needed for the Modal, it's already well-styled.
+// Modal for errors
 const CustomModal = ({ message, onClose }) => (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 backdrop-blur-sm">
         <div className="bg-white rounded-2xl shadow-2xl p-8 m-4 max-w-md w-full transform transition-all duration-300 scale-100">
@@ -23,8 +23,7 @@ const CustomModal = ({ message, onClose }) => (
     </div>
 );
 
-
-// No changes needed for the Loading Component.
+// Loading spinner
 const LoadingComponent = () => (
   <div className="flex flex-col items-center justify-center py-16">
     <div className="relative">
@@ -43,8 +42,7 @@ const LoadingComponent = () => (
   </div>
 );
 
-
-// --- [NEW] Beautifully Redesigned Profile Summary Component ---
+// Profile summary at the top
 const ProfileSummary = ({ specialty, goal, skills, certifications, targetSpecialty }) => (
     <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 mb-8 border border-blue-100">
         <h3 className="text-xl font-bold text-gray-800 mb-6 flex items-center">
@@ -91,7 +89,7 @@ const ProfileSummary = ({ specialty, goal, skills, certifications, targetSpecial
                         {skills.map((skillObj, idx) => (
                             <li key={idx} className="flex items-center text-sm text-gray-800">
                                 <ArrowRight className="w-3 h-3 mr-2 text-purple-400 flex-shrink-0" />
-                                {skillObj.text}
+                                {skillObj.text || skillObj.skill || skillObj}
                             </li>
                         ))}
                     </ul>
@@ -106,7 +104,7 @@ const ProfileSummary = ({ specialty, goal, skills, certifications, targetSpecial
                         {certifications.map((cert, idx) => (
                             <li key={idx} className="flex items-center text-sm text-gray-800">
                                 <ArrowRight className="w-3 h-3 mr-2 text-yellow-400 flex-shrink-0" />
-                                <strong>{cert.title}</strong>
+                                <strong>{cert.title || cert}</strong>
                             </li>
                         ))}
                     </ul>
@@ -116,28 +114,21 @@ const ProfileSummary = ({ specialty, goal, skills, certifications, targetSpecial
     </div>
 );
 
-
-// --- [NEW] Roadmap Step Component for the timeline ---
-const RoadmapStep = ({ step, index, isLast }) => (
+// Timeline phase card
+const TimelinePhase = ({ phase, isLast }) => (
     <div className="relative flex items-start">
-        {/* The timeline vertical line */}
         {!isLast && <div className="absolute top-5 left-5 w-0.5 h-full bg-blue-200"></div>}
-        
-        {/* The icon and circle */}
         <div className="flex-shrink-0 flex flex-col items-center">
             <div className="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center z-10">
                 <GitCommitHorizontal className="w-5 h-5" />
             </div>
         </div>
-
-        {/* The content card */}
         <div className="ml-6 pb-12 w-full">
             <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6 transform hover:scale-[1.02] transition-transform duration-300">
-                <h4 className="text-xl font-bold text-gray-800 mb-2">{step.title}</h4>
-                <p className="text-gray-600 mb-4">{step.description}</p>
+                <h4 className="text-xl font-bold text-gray-800 mb-2">{phase.phase || phase.title}</h4>
                 <ul className="space-y-2">
-                    {step.items.map((item, itemIdx) => (
-                        <li key={itemIdx} className="flex items-start">
+                    {phase.tasks && phase.tasks.map((item, idx) => (
+                        <li key={idx} className="flex items-start">
                             <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-1 flex-shrink-0" />
                             <span className="text-gray-700">{item}</span>
                         </li>
@@ -148,45 +139,14 @@ const RoadmapStep = ({ step, index, isLast }) => (
     </div>
 );
 
-
-// --- [NEW] Utility function to parse the roadmap string ---
-const parseRoadmap = (text) => {
-    if (!text || typeof text !== 'string') return [];
-    
-    // Split the text into sections based on a phase/step heading.
-    // This regex looks for patterns like "Phase 1:", "Step 2:", etc.
-    const sections = text.split(/(?=Phase \d+:|Step \d+:)/g).filter(Boolean);
-
-    return sections.map(section => {
-        const lines = section.trim().split('\n');
-        const titleLine = lines.shift() || 'Untitled Step';
-        const title = titleLine.replace(/:$/, '').trim();
-        
-        // Find the description which is usually after the title and before list items
-        let description = '';
-        while (lines.length > 0 && !lines[0].trim().startsWith('-') && !lines[0].trim().startsWith('*')) {
-            description += (lines.shift() || '') + ' ';
-        }
-
-        // The rest are list items
-        const items = lines
-            .map(line => line.trim().replace(/^- \s*/, '').replace(/^\* \s*/, ''))
-            .filter(Boolean);
-            
-        return { title, description: description.trim(), items };
-    });
-};
-
-
 export default function Agent5Page() {
     const { specialty, goal, skills, certifications, mobility, targetSpecialty } = useContext(AgentContext);
-    // --- State now holds a structured array, not a string ---
-    const [roadmap, setRoadmap] = useState([]);
+    const [roadmap, setRoadmap] = useState(null);
     const [loading, setLoading] = useState(false);
     const [modalMessage, setModalMessage] = useState('');
     const componentRef = useRef();
 
-    // Fetch roadmap from backend (functionality is unchanged)
+    // Fetch roadmap from backend
     const fetchRoadmap = async () => {
         if (!specialty || !goal) {
             setModalMessage("Please ensure your Specialty and Career Goal are set from the previous steps.");
@@ -206,16 +166,11 @@ export default function Agent5Page() {
                 { method: "POST", body: formData }
             );
             if (!response.ok) throw new Error("Failed to fetch roadmap");
-            
             const data = await response.json();
-            
-            // --- [MODIFIED] Parse the raw string into structured data ---
-            const parsedRoadmap = parseRoadmap(data.roadmap);
-            setRoadmap(parsedRoadmap);
-
+            setRoadmap(data.roadmap.structured_roadmap);
         } catch (error) {
             setModalMessage("Failed to fetch roadmap. Please try again.");
-            setRoadmap([]); // Ensure roadmap is cleared on error
+            setRoadmap(null);
         }
         setLoading(false);
     };
@@ -225,9 +180,9 @@ export default function Agent5Page() {
             fetchRoadmap();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [specialty, goal]); // Removed other dependencies to prevent re-fetching on their change unless intended
+    }, [specialty, goal]);
 
-    // Hook for printing functionality (unchanged, but CSS is improved)
+    // Print functionality
     const handlePrint = useReactToPrint({
         content: () => componentRef.current,
         documentTitle: `Career-Roadmap-${specialty}-to-${targetSpecialty}`,
@@ -271,8 +226,8 @@ export default function Agent5Page() {
                     <div className="bg-white rounded-2xl shadow-lg border border-gray-200/80 overflow-hidden">
                         {loading ? (
                             <LoadingComponent />
-                        ) : roadmap.length > 0 ? (
-                            <>
+                        ) : roadmap ? (
+                            <div ref={componentRef}>
                                 <div className="p-8 border-b border-gray-200">
                                     <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                                         <div>
@@ -289,17 +244,53 @@ export default function Agent5Page() {
                                     </div>
                                 </div>
 
-                                {/* --- [NEW] The Roadmap Timeline --- */}
-                                <div ref={componentRef} className="p-8 print-container">
-                                    <div className="space-y-4">
-                                        {roadmap.map((step, index) => (
-                                            <RoadmapStep
-                                                key={index}
-                                                step={step}
-                                                index={index}
-                                                isLast={index === roadmap.length - 1}
+                                {/* --- Enhanced Roadmap Sections --- */}
+                                <div ref={componentRef} className="p-8 print-container space-y-8">
+                                    {/* Career Path */}
+                                    <div className="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-xl shadow-sm">
+                                        <h2 className="text-2xl font-bold text-blue-800 mb-2">Suggested Career Path</h2>
+                                        <p className="text-gray-700 whitespace-pre-line">{roadmap.career_path}</p>
+                                    </div>
+                                    {/* Mobility Score */}
+                                    <div className="bg-indigo-50 border-l-4 border-indigo-400 p-6 rounded-xl shadow-sm">
+                                        <h2 className="text-xl font-bold text-indigo-800 mb-2">Mobility Score & Meaning</h2>
+                                        <p className="text-gray-700 whitespace-pre-line">{roadmap.mobility_score}</p>
+                                    </div>
+                                    {/* Skill Gaps */}
+                                    <div className="bg-white p-6 rounded-xl shadow-sm">
+                                        <h3 className="font-semibold text-gray-700 mb-2">Skill Gaps to Address</h3>
+                                        <ul className="list-disc pl-6">
+                                            {roadmap.skill_gaps && roadmap.skill_gaps.map((s, i) => (
+                                                <li key={i} className="mb-1">{s.skill || s}</li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                    {/* Certifications */}
+                                    <div className="bg-white p-6 rounded-xl shadow-sm">
+                                        <h3 className="font-semibold text-gray-700 mb-2">Certifications to Pursue</h3>
+                                        <ul className="list-disc pl-6">
+                                            {roadmap.certifications && roadmap.certifications.map((c, i) => (
+                                                <li key={i} className="mb-1">
+                                                    <span className="font-bold">{(c.title || '').replace(/\*\*/g, '')}:</span> {c.description}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                    {/* Timeline */}
+                                    <div className="bg-white p-6 rounded-xl shadow-sm">
+                                        <h3 className="font-semibold text-gray-700 mb-4">Action Plan & Timeline</h3>
+                                        {roadmap.timeline_phases && roadmap.timeline_phases.map((phase, i) => (
+                                            <TimelinePhase
+                                                key={i}
+                                                phase={phase}
+                                                isLast={i === roadmap.timeline_phases.length - 1}
                                             />
                                         ))}
+                                    </div>
+                                    {/* Encouragement */}
+                                    <div className="bg-green-50 border-l-4 border-green-400 p-6 rounded-xl shadow-sm">
+                                        <h3 className="font-semibold text-green-700 mb-2">Encouragement</h3>
+                                        <p className="text-gray-700">{roadmap.encouragement}</p>
                                     </div>
                                 </div>
                                 
@@ -315,7 +306,7 @@ export default function Agent5Page() {
                                         </button>
                                     </div>
                                 </div>
-                            </>
+                            </div>
                         ) : (
                             <div className="p-12 text-center">
                                 <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -334,7 +325,6 @@ export default function Agent5Page() {
                     </div>
                 </div>
             </div>
-
             {modalMessage && <CustomModal message={modalMessage} onClose={() => setModalMessage('')} />}
         </div>
     );

@@ -2,6 +2,7 @@ from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from app.agents.agent1_specialty_analyzer import classify_specialty
 from app.agents.agent2_career_mapper import recommend_career_paths
+from app.agents.agent2_career_mapper import is_goal_medically_valid
 from app.agents.agent3_skill_gap_detector import recommend_certifications_for_gap
 from app.agents.agent4_mobility_scorer import score_specialty_mobility
 from app.agents.agent5_roadmap_generator import generate_roadmap
@@ -35,6 +36,8 @@ async def analyze_specialty(file: UploadFile = File(...)):
 
 @app.post("/map-career")
 async def map_career(specialty: str = Form(...), goal: str = Form(...)):
+    if not is_goal_medically_valid(goal):
+        return {"error": "Invalid goal. Please describe a medically realistic and meaningful career goal."}
     return recommend_career_paths(specialty, goal)
 
 @app.post("/skill-gap")

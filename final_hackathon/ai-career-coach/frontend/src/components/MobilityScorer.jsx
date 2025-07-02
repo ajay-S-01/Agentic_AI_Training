@@ -1,5 +1,5 @@
 // src/components/MobilityScorer.js
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useContext, useRef } from 'react';
 import axios from 'axios';
 import { AgentContext } from '../context/AgentContext';
 
@@ -52,11 +52,16 @@ export default function MobilityScorer() {
     }
   };
 
-  // useEffect hook to call fetchScore when the component mounts or specialty changes
+  const calledRef = useRef(false);
+
   useEffect(() => {
-    fetchScore();
+    if (!calledRef.current) {
+      fetchScore();
+      calledRef.current = true;
+    }
+    // Optionally, reset calledRef.current = false if specialty changes
     // eslint-disable-next-line
-  }, [specialty]); // Dependency array: re-run effect if specialty changes
+  }, [specialty]);
 
   return (
     <div className="w-full max-w-2xl bg-white p-8 rounded-xl shadow-lg border border-gray-200 animate-fade-in">

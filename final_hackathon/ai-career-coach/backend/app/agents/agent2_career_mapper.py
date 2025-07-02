@@ -1,10 +1,13 @@
+from fastapi import FastAPI, Form
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
 import os
 import json
 
+app = FastAPI()
 load_dotenv()
 
+# Initialize LLM
 llm = ChatOpenAI(
     openai_api_key=os.getenv("GROQ_API_KEY"),
     openai_api_base="https://api.groq.com/openai/v1",
@@ -12,6 +15,26 @@ llm = ChatOpenAI(
     temperature=0.4,
 )
 
+# Step 1: Validate if the goal is realistic & medical
+def is_goal_medically_valid(goal: str) -> bool:
+    validation_prompt = f"""
+You are an intelligent assistant helping validate user career goals.
+
+User's goal: "{goal}"
+
+Is this goal realistic, medically related, and meaningful for a healthcare professional?
+
+Respond only with "yes" or "no".
+"""
+    try:
+        response = llm.invoke(validation_prompt)
+        result = response.content.strip().lower()
+        return result == "yes"
+    except Exception as e:
+        print("Validation Error:", e)
+        return False
+
+# Step 2: Recommend career paths
 def recommend_career_paths(specialty: str, goal: str) -> dict:
     prompt = f"""
 You are a Career Advisor AI for medical professionals.
@@ -28,10 +51,10 @@ Format your response as a JSON array, like:
 ]
 Respond with only the JSON array, no explanation.
 """
-    response = llm.invoke(prompt)
     try:
+        response = llm.invoke(prompt)
         paths = json.loads(response.content.strip())
-    except Exception:
-        # fallback: return as text if parsing fails
+        return {"paths": paths}
+    except Exception as e:
+        print("Parsing Error:", e)
         return {"paths": []}
-    return {"paths": paths}

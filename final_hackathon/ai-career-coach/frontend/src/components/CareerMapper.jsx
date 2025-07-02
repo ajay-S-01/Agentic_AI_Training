@@ -20,6 +20,7 @@ export default function CareerMapper() {
   const { specialty, setSpecialty, goal, setGoal, careerPaths, setCareerPaths } = useContext(AgentContext);
   const [loading, setLoading] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
+  const [goalError, setGoalError] = useState(''); // <-- NEW
 
   const specialties = [
     "General Medicine",
@@ -33,13 +34,14 @@ export default function CareerMapper() {
 
   useEffect(() => {
     if (specialty && !goal) {
-      setGoal(`move to the next level in ${specialty.toLowerCase()}`);
+      setGoal('');
     }
   }, [specialty, goal, setGoal]);
 
   const handleSubmit = async () => {
+    setGoalError(''); // clear previous error
     if (!specialty || !goal) {
-      setModalMessage("Please select a specialty and enter your goal.");
+      setGoalError("Please select a specialty and enter your goal.");
       return;
     }
     setLoading(true);
@@ -50,7 +52,12 @@ export default function CareerMapper() {
 
     try {
       const res = await axios.post("http://localhost:8000/map-career", formData);
-      setCareerPaths(res.data.paths || []);
+      if (res.data.error) {
+        setGoalError(res.data.error); // Show backend error below the field
+        setCareerPaths([]);
+      } else {
+        setCareerPaths(res.data.paths || []);
+      }
     } catch (err) {
       setModalMessage("Failed to fetch career paths. Please try again.");
     } finally {
@@ -93,6 +100,9 @@ export default function CareerMapper() {
           onChange={(e) => setGoal(e.target.value)}
           className="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
         />
+        {goalError && (
+          <p className="text-red-600 text-sm mt-2">{goalError}</p>
+        )}
       </div>
 
       {/* Submit button */}
